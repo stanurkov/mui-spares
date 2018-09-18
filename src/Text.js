@@ -1,13 +1,12 @@
-import React, {Component} from 'react';
-import muiThemeable from 'material-ui/styles/muiThemeable';
+import React from 'react';
+import { Typography } from '@material-ui/core';
+
 
 const Text = (props) => (
-  <span style={{
-      fontWeight: "normal",
-      fontFamily: props.muiTheme.fontFamily,
-    }}>
-    {props.text}
-  </span>
+  <Typography variant={ props.variant || "body1" } style={{ display: "inline-block" }}>
+    { props.text }
+    { props.children }
+  </Typography>
 );
 
-export default muiThemeable()(Text);
+export default Text;

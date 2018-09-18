@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import ThemeDiv from './ThemeDiv';
-import CircularProgress from 'material-ui/CircularProgress';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import ln3 from 'ln3';
+import { Typography } from '@material-ui/core';
 
 export default class AppLoader extends Component {
     constructor (props, ...other) {
@@ -34,11 +34,12 @@ export default class AppLoader extends Component {
         return (this.state.open) ? (
             <div style={{ backgroundColor: "rgba(120,120,120,0.8)", width: "100%", height: window.innerHeight, color: "#E3F2FD" }}>
                 <div className="centered" >
-                <ThemeDiv >
+                
                     <CircularProgress size={60} thickness={7}  />
                     <br />
-                    { ln3.text("title.please.wait", "Please wait...") }
-                </ThemeDiv>
+                    <Typography >
+                        { ln3.text("title.please.wait", "Please wait...") }
+                    </Typography>
                 </div>
             </div>
         ) : (<span />)

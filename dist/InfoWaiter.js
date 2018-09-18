@@ -13,7 +13,7 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _CircularProgress = require('material-ui/CircularProgress');
+var _CircularProgress = require('@material-ui/core/CircularProgress');
 
 var _CircularProgress2 = _interopRequireDefault(_CircularProgress);
 

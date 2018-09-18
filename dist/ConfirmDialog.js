@@ -11,17 +11,19 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Dialog = require('material-ui/Dialog');
+var _Dialog = require('@material-ui/core/Dialog');
 
 var _Dialog2 = _interopRequireDefault(_Dialog);
 
-var _FlatButton = require('material-ui/FlatButton');
+var _Button = require('@material-ui/core/Button');
 
-var _FlatButton2 = _interopRequireDefault(_FlatButton);
+var _Button2 = _interopRequireDefault(_Button);
 
 var _ln = require('ln3');
 
 var _ln2 = _interopRequireDefault(_ln);
+
+var _core = require('@material-ui/core');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -175,21 +177,92 @@ var ConfirmDialog = function (_Component) {
 
             switch (buttons) {
                 case confirmButtons.ok:
-                    actions = [_react2.default.createElement(_FlatButton2.default, { label: _ln2.default.text("button.ok", "OK"), primary: true, onClick: this.handleConfirm })];
+                    actions = [_react2.default.createElement(
+                        _Button2.default,
+                        {
+                            key: 'OK',
+                            color: 'primary', onClick: this.handleConfirm
+                        },
+                        _ln2.default.text("button.ok", "OK")
+                    )];
                     break;
                 case confirmButtons.yesNo:
-                    actions = [_react2.default.createElement(_FlatButton2.default, { label: _ln2.default.text("button.no", "No"), onClick: this.handleDeny }), _react2.default.createElement(_FlatButton2.default, { label: _ln2.default.text("button.yes", "Yes"), primary: true, onClick: this.handleConfirm })];
+                    actions = [_react2.default.createElement(
+                        _Button2.default,
+                        {
+                            key: 'no',
+                            onClick: this.handleDeny
+                        },
+                        ',',
+                        _ln2.default.text("button.no", "No")
+                    ), _react2.default.createElement(
+                        _Button2.default,
+                        {
+                            key: 'yes',
+                            color: 'primary', onClick: this.handleConfirm
+                        },
+                        _ln2.default.text("button.yes", "Yes")
+                    )];
                     modal = true;
                     break;
                 case confirmButtons.noYes:
-                    actions = [_react2.default.createElement(_FlatButton2.default, { label: _ln2.default.text("button.yes", "Yes"), onClick: this.handleConfirm }), _react2.default.createElement(_FlatButton2.default, { label: _ln2.default.text("button.no", "No"), primary: true, onClick: this.handleDeny })];
+                    actions = [_react2.default.createElement(
+                        _Button2.default,
+                        {
+                            key: 'yes',
+                            color: 'primary', onClick: this.handleConfirm
+                        },
+                        _ln2.default.text("button.yes", "Yes")
+                    ), _react2.default.createElement(
+                        _Button2.default,
+                        {
+                            key: 'no',
+                            onClick: this.handleDeny
+                        },
+                        _ln2.default.text("button.no", "No")
+                    )];
                     modal = true;
                     break;
                 case confirmButtons.okCancel:
-                    actions = [_react2.default.createElement(_FlatButton2.default, { label: _ln2.default.text("button.cancel", "Cancel"), onClick: this.handleCancel }), _react2.default.createElement(_FlatButton2.default, { label: _ln2.default.text("button.ok", "OK"), primary: true, onClick: this.handleConfirm })];
+                    actions = [_react2.default.createElement(
+                        _Button2.default,
+                        {
+                            key: 'cancel',
+                            onClick: this.handleCancel
+                        },
+                        _ln2.default.text("button.cancel", "Cancel")
+                    ), _react2.default.createElement(
+                        _Button2.default,
+                        {
+                            key: 'OK',
+                            color: 'primary', onClick: this.handleConfirm
+                        },
+                        _ln2.default.text("button.ok", "OK")
+                    )];
                     break;
                 default:
-                    actions = [_react2.default.createElement(_FlatButton2.default, { label: _ln2.default.text("button.cancel", "Cancel"), onClick: this.handleCancel }), _react2.default.createElement(_FlatButton2.default, { label: _ln2.default.text("button.no", "No"), onClick: this.handleDeny }), _react2.default.createElement(_FlatButton2.default, { label: _ln2.default.text("button.yes", "Yes"), primary: true, onClick: this.handleConfirm })];
+                    actions = [_react2.default.createElement(
+                        _Button2.default,
+                        {
+                            key: 'cancel',
+                            onClick: this.handleCancel
+                        },
+                        _ln2.default.text("button.cancel", "Cancel")
+                    ), _react2.default.createElement(
+                        _Button2.default,
+                        {
+                            key: 'no',
+                            onClick: this.handleDeny
+                        },
+                        _ln2.default.text("button.no", "No")
+                    ), _react2.default.createElement(
+                        _Button2.default,
+                        {
+                            key: 'yes',
+                            color: 'primary', onClick: this.handleConfirm
+                        },
+                        _ln2.default.text("button.yes", "Yes")
+                    )];
             }
 
             if (this.state.noModal) {
@@ -200,12 +273,23 @@ var ConfirmDialog = function (_Component) {
                 _Dialog2.default,
                 {
                     open: this.props.open || this.state.open,
-                    actions: actions,
-                    modal: modal,
-                    title: this.props.title || this.state.title,
-                    onRequestClose: this.handleCancel
+                    onClose: this.handleCancel
                 },
-                container ? container.content : this.props.children
+                _react2.default.createElement(
+                    _core.DialogTitle,
+                    null,
+                    this.props.title || this.state.title
+                ),
+                _react2.default.createElement(
+                    _core.DialogContent,
+                    null,
+                    container ? container.content : this.props.children
+                ),
+                _react2.default.createElement(
+                    _core.DialogActions,
+                    null,
+                    actions
+                )
             );
         }
     }]);

@@ -10,15 +10,17 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Paper = require('material-ui/Paper');
+var _Paper = require('@material-ui/core/Paper');
 
 var _Paper2 = _interopRequireDefault(_Paper);
 
-var _colors = require('material-ui/styles/colors');
+var _colors = require('@material-ui/core/colors');
 
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _core = require('@material-ui/core');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -51,8 +53,19 @@ var ErrorPaper = function (_Component) {
             if (errorText) {
                 return _react2.default.createElement(
                     _Paper2.default,
-                    { zDepth: zDepth || 1, style: { margin: margin || 8, padding: padding || 6, backgroundColor: color || _colors.red100 } },
-                    errorText
+                    {
+                        elevation: zDepth || 2,
+                        style: {
+                            margin: margin || 16,
+                            padding: padding || 8,
+                            backgroundColor: color || _colors.red[100]
+                        }
+                    },
+                    _react2.default.createElement(
+                        _core.Typography,
+                        { variant: 'body2' },
+                        errorText
+                    )
                 );
             } else {
                 return null;

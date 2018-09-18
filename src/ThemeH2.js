@@ -1,15 +1,12 @@
 import React from 'react';
-import muiThemeable from 'material-ui/styles/muiThemeable';
+import { Typography } from '@material-ui/core';
 
 const ThemeH2 = (props) => (
-  <h2 style={{
-      fontWeight: "normal",
-      fontFamily: props.muiTheme.fontFamily,
-    }}>
+  <Typography variant="headline" >
     {props.caption}
-  </h2>
+  </Typography>
 );
 
 //
 
-export default muiThemeable()(ThemeH2);
+export default ThemeH2;

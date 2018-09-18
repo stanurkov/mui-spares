@@ -10,17 +10,15 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _ThemeDiv = require('./ThemeDiv');
-
-var _ThemeDiv2 = _interopRequireDefault(_ThemeDiv);
-
-var _CircularProgress = require('material-ui/CircularProgress');
+var _CircularProgress = require('@material-ui/core/CircularProgress');
 
 var _CircularProgress2 = _interopRequireDefault(_CircularProgress);
 
 var _ln = require('ln3');
 
 var _ln2 = _interopRequireDefault(_ln);
+
+var _core = require('@material-ui/core');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -78,11 +76,11 @@ var AppLoader = function (_Component) {
                 _react2.default.createElement(
                     'div',
                     { className: 'centered' },
+                    _react2.default.createElement(_CircularProgress2.default, { size: 60, thickness: 7 }),
+                    _react2.default.createElement('br', null),
                     _react2.default.createElement(
-                        _ThemeDiv2.default,
+                        _core.Typography,
                         null,
-                        _react2.default.createElement(_CircularProgress2.default, { size: 60, thickness: 7 }),
-                        _react2.default.createElement('br', null),
                         _ln2.default.text("title.please.wait", "Please wait...")
                     )
                 )
