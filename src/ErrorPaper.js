@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import Paper from 'material-ui/Paper';
-import {red100, red200} from 'material-ui/styles/colors';
+import Paper from '@material-ui/core/Paper';
+import { red } from '@material-ui/core/colors';
 import PropTypes from 'prop-types';
+import { Typography } from '@material-ui/core';
 
 
 class ErrorPaper extends Component {
@@ -29,8 +30,17 @@ class ErrorPaper extends Component {
 
         if (errorText) {
             return (
-                <Paper zDepth={zDepth || 1} style={{margin: margin || 8, padding: padding || 6, backgroundColor: color || red100 }}>
-                    {errorText}
+                <Paper 
+                    elevation={zDepth || 2} 
+                    style={{
+                        margin: margin || 16, 
+                        padding: padding || 8, 
+                        backgroundColor: color || red[100] 
+                    }}
+                >
+                    <Typography variant="body2" >
+                        {errorText}
+                    </Typography>
                 </Paper>
             );
         } else {

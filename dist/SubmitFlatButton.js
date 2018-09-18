@@ -4,21 +4,33 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _FlatButton = require('material-ui/FlatButton');
+var _Button = require('@material-ui/core/Button');
 
-var _FlatButton2 = _interopRequireDefault(_FlatButton);
+var _Button2 = _interopRequireDefault(_Button);
 
-var _CircularProgress = require('material-ui/CircularProgress');
+var _CircularProgress = require('@material-ui/core/CircularProgress');
 
 var _CircularProgress2 = _interopRequireDefault(_CircularProgress);
 
+var _ButtonLabel = require('./ButtonLabel');
+
+var _ButtonLabel2 = _interopRequireDefault(_ButtonLabel);
+
+var _ln = require('ln3');
+
+var _ln2 = _interopRequireDefault(_ln);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -41,36 +53,59 @@ var SubmitFlatButton = function (_Component) {
   _createClass(SubmitFlatButton, [{
     key: 'handleClick',
     value: function handleClick(event) {
-      if (!this.props.waiting || this.props.onClick) {
+      if (!this.props.waiting && this.props.onClick) {
         this.props.onClick(event);
       }
     }
   }, {
     key: 'render',
     value: function render() {
-      var icon = null;
-      var label = this.props.label || "Submit";
+      var _props = this.props,
+          icon = _props.icon,
+          iconStyle = _props.iconStyle,
+          iconSize = _props.iconSize,
+          label = _props.label,
+          waiting = _props.waiting,
+          labelPosition = _props.labelPosition,
+          alwaysShowLabel = _props.alwaysShowLabel,
+          color = _props.color,
+          other = _objectWithoutProperties(_props, ['icon', 'iconStyle', 'iconSize', 'label', 'waiting', 'labelPosition', 'alwaysShowLabel', 'color']);
 
-      if (this.props.waiting) {
-        icon = _react2.default.createElement(_CircularProgress2.default, { style: this.props.iconStyle, size: this.props.iconSize || 24 });
-        if (!this.props.alwaysShowLabel) {
+      if (!label) {
+        label = _ln2.default.text("button.ok", "OK");
+      }
+
+      if (!color) {
+        color = "primary";
+      }
+
+      if (waiting) {
+        var style = _extends({}, iconStyle);
+
+        style.position = 'relative';
+        style.left = -4;
+        style.top = 2;
+
+        icon = _react2.default.createElement(_CircularProgress2.default, { style: style, thickness: 5, size: iconSize || 14 });
+        if (!alwaysShowLabel) {
           label = null;
         }
       }
 
-      return _react2.default.createElement(_FlatButton2.default, {
-        label: label,
-        type: 'submit',
-        name: this.props.name,
-        className: this.props.className,
-        id: this.props.id,
-        primary: this.props.primary,
-        onClick: this.handleClick,
-        onSubmit: this.handleClick,
-        icon: icon,
-        style: this.props.style,
-        labelPosition: this.props.labelPosition
-      });
+      return _react2.default.createElement(
+        _Button2.default,
+        _extends({
+          type: 'submit',
+          onClick: this.handleClick,
+          onSubmit: this.handleClick,
+          color: color
+        }, other),
+        _react2.default.createElement(_ButtonLabel2.default, {
+          label: label,
+          icon: icon,
+          labelPosition: labelPosition
+        })
+      );
     }
   }]);
 

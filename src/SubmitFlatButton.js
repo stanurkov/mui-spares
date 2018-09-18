@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import FlatButton from 'material-ui/FlatButton';
-import CircularProgress from 'material-ui/CircularProgress';
+import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import ButtonLabel from './ButtonLabel';
+import ln3 from 'ln3';
 
 
 class SubmitFlatButton extends Component {
@@ -11,38 +13,63 @@ class SubmitFlatButton extends Component {
   }
 
   handleClick(event) {
-      if (!this.props.waiting || this.props.onClick) {
+      if (!this.props.waiting && this.props.onClick) {
         this.props.onClick(event);
       }
   }
 
   render() {
-    var icon = null;
-    var label = this.props.label || "Submit";
+    let { 
+      icon,
+      iconStyle,
+      iconSize,
+      label,
+      waiting,
+      labelPosition,
+      alwaysShowLabel,
+      color,
+      ...other,
+    } = this.props;
 
-    if (this.props.waiting) {
+    if (!label) {
+      label = ln3.text("button.ok", "OK");
+    }
+
+    if (!color) {
+      color = "primary";
+    }
+
+    if (waiting) {
+      const 
+        style = { ...iconStyle};
+
+      style.position = 'relative';
+      style.left = -4;
+      style.top = 2;
+
       icon = (
-        <CircularProgress style={this.props.iconStyle} size={this.props.iconSize || 24} />
+        <CircularProgress style={style} thickness={5} size={iconSize || 14} />
       );
-      if (!this.props.alwaysShowLabel) {
+      if (!alwaysShowLabel) {
         label = null;
       }
     }
+    
 
     return (
-      <FlatButton
-        label={label}
+      <Button
         type="submit"
-        name={this.props.name}
-        className={this.props.className}
-        id={this.props.id}
-        primary={this.props.primary}
-        onClick={this.handleClick}
-        onSubmit={this.handleClick}
-        icon={icon}
-        style={this.props.style}
-        labelPosition={this.props.labelPosition}
-      />
+        onClick={ this.handleClick }
+        onSubmit={ this.handleClick }
+        color={ color }
+        {...other}        
+      >
+        <ButtonLabel 
+          label={ label }
+          icon={ icon }
+          labelPosition={ labelPosition }
+        /> 
+      </Button>
     );
   }
 

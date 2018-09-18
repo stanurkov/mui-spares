@@ -12,21 +12,19 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Paper = require('material-ui/Paper');
+var _Paper = require('@material-ui/core/Paper');
 
 var _Paper2 = _interopRequireDefault(_Paper);
-
-var _muiThemeable = require('material-ui/styles/muiThemeable');
-
-var _muiThemeable2 = _interopRequireDefault(_muiThemeable);
 
 var _flexband = require('flexband');
 
 var _flexband2 = _interopRequireDefault(_flexband);
 
-var _ThemeH = require('./ThemeH2');
+var _Typography = require('@material-ui/core/Typography');
 
-var _ThemeH2 = _interopRequireDefault(_ThemeH);
+var _Typography2 = _interopRequireDefault(_Typography);
+
+var _styles = require('@material-ui/core/styles');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -61,11 +59,12 @@ var NamedPaper = function (_Component) {
                 children = _props.children,
                 zDepth = _props.zDepth,
                 style = _props.style,
-                muiTheme = _props.muiTheme,
-                other = _objectWithoutProperties(_props, ['fullWidth', 'fullHeight', 'innerStyle', 'headStyle', 'titleStyle', 'caption', 'title', 'children', 'zDepth', 'style', 'muiTheme']);
+                width = _props.width,
+                other = _objectWithoutProperties(_props, ['fullWidth', 'fullHeight', 'innerStyle', 'headStyle', 'titleStyle', 'caption', 'title', 'children', 'zDepth', 'style', 'width']);
 
             var addStyle = _extends({}, style);
 
+            if (width) addStyle.width = width;
             if (fullWidth) addStyle.width = "100%";
             if (fullHeight) addStyle.height = "100%";
 
@@ -73,7 +72,7 @@ var NamedPaper = function (_Component) {
 
             return _react2.default.createElement(
                 _Paper2.default,
-                _extends({ zDepth: zDepth || 2, style: addStyle }, other),
+                _extends({ elevation: zDepth || 2, style: addStyle }, other),
                 _react2.default.createElement(
                     _flexband2.default,
                     { direction: 'column', justify: 'space-between', fullHeight: true },
@@ -81,8 +80,11 @@ var NamedPaper = function (_Component) {
                         _flexband.FlexBandItem,
                         { grow: '0', style: headStyle },
                         _react2.default.createElement(
-                            'h3',
-                            { style: _extends({}, titleStyle, { margin: 0, padding: "1em", verticalAlign: "center", fontWeight: "normal", fontFamily: muiTheme.fontFamily }) },
+                            _Typography2.default,
+                            {
+                                style: _extends({}, titleStyle, { margin: 0, padding: "1em", verticalAlign: "center", fontWeight: "normal" }),
+                                variant: 'subheading'
+                            },
                             title || caption
                         )
                     ),
@@ -99,4 +101,4 @@ var NamedPaper = function (_Component) {
     return NamedPaper;
 }(_react.Component);
 
-exports.default = (0, _muiThemeable2.default)()(NamedPaper);
+exports.default = (0, _styles.withTheme)()(NamedPaper);

@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import Paper from 'material-ui/Paper';
-import muiThemeable from 'material-ui/styles/muiThemeable';
+import Paper from '@material-ui/core/Paper';
 import FlexBand, { FlexBandItem } from 'flexband';
-
-import ThemeH2 from './ThemeH2';
+import Typography from '@material-ui/core/Typography';
+import { withTheme } from '@material-ui/core/styles';
 
 
 
@@ -21,12 +20,13 @@ class NamedPaper extends Component {
             children,
             zDepth,
             style,
-            muiTheme,
+            width,
             ...other,
         } = this.props;
   
         const addStyle = { ...style };
 
+        if (width) addStyle.width = width;
         if (fullWidth) addStyle.width = "100%";
         if (fullHeight) addStyle.height = "100%";
 
@@ -34,12 +34,15 @@ class NamedPaper extends Component {
             
 
         return (
-            <Paper zDepth={zDepth || 2} style={addStyle} {...other} >
+            <Paper elevation={zDepth || 2} style={addStyle} {...other} >
                 <FlexBand direction="column" justify="space-between" fullHeight={true} >
                     <FlexBandItem grow="0" style={ headStyle } >
-                        <h3 style={ {...titleStyle, margin: 0, padding: "1em", verticalAlign: "center", fontWeight: "normal", fontFamily: muiTheme.fontFamily, } }>
+                        <Typography 
+                            style={ {...titleStyle, margin: 0, padding: "1em", verticalAlign: "center", fontWeight: "normal", } }
+                            variant="subheading"
+                        >
                             { title || caption }
-                        </h3>
+                        </Typography>
                     </FlexBandItem>
                     <FlexBandItem grow="1">
                         { children }
@@ -51,4 +54,4 @@ class NamedPaper extends Component {
 
 }
 
-export default muiThemeable()(NamedPaper);
+export default withTheme()(NamedPaper);

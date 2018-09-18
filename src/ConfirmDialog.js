@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
+import Dialog from '@material-ui/core/Dialog';
+import Button from '@material-ui/core/Button';
 import ln3 from 'ln3';
+import { DialogActions, DialogTitle, DialogContent } from '@material-ui/core';
 
 export const confirmButtons = {
     yesNo: "yes-no",
@@ -122,34 +123,84 @@ class ConfirmDialog extends Component {
         switch (buttons) {
             case confirmButtons.ok:
                 actions = [
-                    <FlatButton label={ ln3.text("button.ok", "OK") }  primary={true} onClick={this.handleConfirm} />
+                    <Button 
+                        key="OK"
+                        color="primary" onClick={this.handleConfirm} 
+                    >
+                        { ln3.text("button.ok", "OK") }  
+                    </Button>
                 ];
                 break;
             case confirmButtons.yesNo:
                 actions = [
-                    <FlatButton label={ ln3.text("button.no", "No") } onClick={this.handleDeny} />,
-                    <FlatButton label={ ln3.text("button.yes", "Yes") } primary={true} onClick={this.handleConfirm} />
+                    <Button 
+                        key="no"
+                        onClick={this.handleDeny} 
+                    >,
+                        { ln3.text("button.no", "No") }
+                    </Button>,
+                    <Button 
+                        key="yes"
+                        color="primary" onClick={this.handleConfirm} 
+                    >
+                        { ln3.text("button.yes", "Yes") } 
+                    </Button>
                 ];
                 modal = true;
                 break;
             case confirmButtons.noYes:
                 actions = [
-                    <FlatButton label={ ln3.text("button.yes", "Yes") } onClick={this.handleConfirm} />,
-                    <FlatButton label={ ln3.text("button.no", "No") } primary={true} onClick={this.handleDeny} />
+                    <Button 
+                        key="yes"
+                        color="primary" onClick={this.handleConfirm} 
+                    >
+                        { ln3.text("button.yes", "Yes") } 
+                    </Button>,
+                    <Button 
+                        key="no"
+                        onClick={this.handleDeny} 
+                    >
+                        { ln3.text("button.no", "No") }
+                    </Button>
                 ];
                 modal = true;
                 break;
             case confirmButtons.okCancel:
                 actions = [
-                    <FlatButton label={ ln3.text("button.cancel", "Cancel") } onClick={this.handleCancel} />,
-                    <FlatButton label={ ln3.text("button.ok", "OK") } primary={true} onClick={this.handleConfirm} />
+                    <Button 
+                        key="cancel"
+                        onClick={this.handleCancel} 
+                    >
+                        { ln3.text("button.cancel", "Cancel") } 
+                    </Button>,
+                    <Button 
+                        key="OK"
+                        color="primary" onClick={this.handleConfirm} 
+                    >
+                        { ln3.text("button.ok", "OK") }  
+                    </Button>
                 ];
                 break;
             default:
                 actions = [
-                    <FlatButton label={ ln3.text("button.cancel", "Cancel") } onClick={this.handleCancel} />,
-                    <FlatButton label={ ln3.text("button.no", "No") } onClick={this.handleDeny} />,
-                    <FlatButton label={ ln3.text("button.yes", "Yes") } primary={true} onClick={this.handleConfirm} />
+                    <Button 
+                        key="cancel"
+                        onClick={this.handleCancel} 
+                    >
+                        { ln3.text("button.cancel", "Cancel") } 
+                    </Button>,
+                    <Button 
+                        key="no"
+                        onClick={this.handleDeny} 
+                    >
+                        { ln3.text("button.no", "No") }
+                    </Button>,
+                    <Button 
+                        key="yes"
+                        color="primary" onClick={this.handleConfirm} 
+                    >
+                        { ln3.text("button.yes", "Yes") } 
+                    </Button>,
                 ];
         }
 
@@ -160,12 +211,17 @@ class ConfirmDialog extends Component {
         return (
             <Dialog
                 open={this.props.open || this.state.open}
-                actions={actions}
-                modal={modal}
-                title={this.props.title || this.state.title}
-                onRequestClose={this.handleCancel}
+                onClose={this.handleCancel}
             >
-                { (container) ? container.content : this.props.children}
+                <DialogTitle>
+                    { this.props.title || this.state.title }
+                </DialogTitle>
+                <DialogContent>
+                    { (container) ? container.content : this.props.children}
+                </DialogContent>
+                <DialogActions>
+                    { actions }
+                </DialogActions>
             </Dialog>
         );
     }

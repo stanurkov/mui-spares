@@ -1,6 +1,6 @@
 {
   "name": "mui-spares",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A Collection of React Material UI additional components",
   "main": "dist/index.js",
   "homepage": "https://github.com/stanurkov/mui-spares",
@@ -25,15 +25,14 @@
   "author": "Stefan Tanurkov",
   "license": "MIT",
   "dependencies": {
+    "@material-ui/core": "^3.1.0",
+    "@material-ui/icons": "^3.0.1",
     "flexband": "0.0.3",
     "keycode": "^2.1.9",
     "ln3": "0.0.3",
-    "material-ui": "^0.20.0",
-    "prop-types": "^15.6.1",
+    "prop-types": "^15.6.2",
     "react": "^16.2.0",
-    "react-addons-transition-group": "^15.6.2",
-    "react-dom": "^16.2.0",
-    "react-event-listener": "^0.5.3"
+    "react-dom": "^16.2.0"
   },
   "devDependencies": {
     "babel-core": "^6.23.1",
